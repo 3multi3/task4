@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soru 1</title>
+</head>
+<body>
+  <div>
+    1'den 99'a kadar olan sayıları for döngüsü ile yan yana
+    <button onclick="sirala()" id="sirala">Sırala</button>
+  </div>
+  <br />
+  <button id="rastgeleSayi" onclick="rastgeleSayiGoster()" disabled>
+    Rastgele Sayı Seç
+  </button>
+  <br />
+  <div id="ekran">
+    <br />
+  </div>
+
+  <script>
+    const ekranElementi = document.getElementById("ekran");
+
+    function sirala() {
+      ekranElementi.innerHTML = "";
+      ekranElementi.appendChild(document.createElement("br"));
+
+      for (let i = 1; i < 100; i++) {
+        const spanElementi = document.createElement("span");
+        spanElementi.classList.add(`sayi-${i}`);
+        spanElementi.textContent = i + " ";
+        ekranElementi.appendChild(spanElementi);
+
+        if (i % 10 === 0) {
+          ekranElementi.appendChild(document.createElement("br"));
+        }
+      }
+
+      document.getElementById("sirala").disabled = true;
+      document.getElementById("rastgeleSayi").disabled = false;
+    }
+
+    function rastgeleSayiGoster() {
+      const rastgeleSayi = Math.floor(Math.random() * 99) + 1;
+
+      const spanElementleri = ekranElementi.querySelectorAll("span");
+      for (const spanElementi of spanElementleri) {
+        if (spanElementi.textContent.trim() === rastgeleSayi.toString()) {
+          spanElementi.style.color = "red";
+          spanElementi.style.fontWeight = "bold";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
